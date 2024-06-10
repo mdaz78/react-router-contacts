@@ -6,6 +6,7 @@ import {
   redirect,
   useLoaderData,
   useNavigation,
+  useSubmit,
 } from "react-router-dom";
 import { createContact, getContacts } from "../contacts";
 
@@ -24,6 +25,7 @@ export async function action() {
 export default function Root() {
   const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
+  const submit = useSubmit();
 
   useEffect(() => {
     document.getElementById("q").value = q;
@@ -42,6 +44,7 @@ export default function Root() {
               type="search"
               name="q"
               defaultValue={q}
+              onChange={(e) => submit(e.currentTarget.form)}
             />
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
